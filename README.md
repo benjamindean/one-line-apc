@@ -7,7 +7,7 @@ Dead simple wrapper class for [APC](http://php.net/manual/en/intro.apc.php) and 
 Install with [Composer](https://getcomposer.org):
 
 ```
-composer require benjaminabel/one-line-apc
+composer require benjamindean/one-line-apc
 ```
 
 ## Usage

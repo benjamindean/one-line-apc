@@ -1,5 +1,5 @@
 {
-  "name": "benjaminabel/one-line-apc",
+  "name": "benjamindean/one-line-apc",
   "type": "library",
   "description": "Dead simple wrapper class for APC and APCu which capable of setting and getting cached data in one line.",
   "keywords": [
@@ -7,7 +7,7 @@
     "apcu",
     "cache"
   ],
-  "homepage": "https://github.com/benjaminabel/one-line-apc",
+  "homepage": "https://github.com/benjamindean/one-line-apc",
   "license": "MIT",
   "require": {
     "php": ">=5.3.0"
