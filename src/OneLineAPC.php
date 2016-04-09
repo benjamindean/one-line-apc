@@ -1,7 +1,7 @@
 <?php
 
 /**
- * OneLineAPC v0.1.0
+ * OneLineAPC v0.1.1
  * By Benjamin Dean
  */
 class OneLineAPC
@@ -62,11 +62,7 @@ class OneLineAPC
      */
     private function testCallback($callback, $params)
     {
-        if (is_callable($callback)) {
-            return call_user_func_array($callback, $params);
-        } else {
-            return $callback;
-        }
+        return (is_callable($callback)) ? call_user_func_array($callback, $params) : $callback;
     }
 
     /**
