@@ -1,10 +1,9 @@
 <?php
 
 /**
- * OneLineAPC v0.0.1
+ * OneLineAPC v0.1.0
  * By Benjamin Dean
  */
-
 class OneLineAPC
 {
     /**
@@ -54,6 +53,23 @@ class OneLineAPC
     }
 
     /**
+     * Testing if it's a valid callback.
+     * If not, just returning it.
+     *
+     * @param $callback
+     * @param array $params
+     * @return mixed
+     */
+    private function testCallback($callback, $params)
+    {
+        if (is_callable($callback)) {
+            return call_user_func_array($callback, $params);
+        } else {
+            return $callback;
+        }
+    }
+
+    /**
      * Setting cache.
      *
      * @param $key
@@ -85,15 +101,16 @@ class OneLineAPC
      *
      * @param $key
      * @param $callback
-     * @param $ttl
+     * @param bool $params
+     * @param bool $ttl
      * @return mixed
      */
-    public function cached($key, $callback, $ttl = false)
+    public function cached($key, $callback, $params = array(), $ttl = false)
     {
         $cachedData = $this->getCache($key);
 
         if (!$cachedData) {
-            $cachedData = call_user_func($callback);
+            $cachedData = $this->testCallback($callback, $params);
             $this->setCache($key, $cachedData, $ttl);
         }
 

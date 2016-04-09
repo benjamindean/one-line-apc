@@ -45,10 +45,12 @@ $cache->cached('key', 'functionName');
 ```
 
 `functionName` is the name of some function in your code which returns the data that needs to be cached.
+You can also pass function arguments as a third argument here.
+
 In case your function is within some class, pass it as an array of Object and a function name:
 
 ```php
-$cache->cached('cacheKey', array($obj, 'functionName'));
+$cache->cached('key', array($obj, 'functionName'));
 ```
 
 You can find out more about callbacks [here](http://php.net/manual/en/language.types.callable.php).
