@@ -1,13 +1,18 @@
 # OneLineAPC
 
-Dead simple wrapper class for [APC](http://php.net/manual/en/intro.apc.php) and [APCu](http://php.net/manual/en/intro.apcu.php) which capable of setting and getting cached data from a callback in one single line.
+Dead simple wrapper class for [APC](http://php.net/manual/en/intro.apc.php) and [APCu](http://php.net/manual/en/intro.apcu.php) which capable of setting and getting cached data from a callback or a variable in one single line.
+
+## Requirements
+
+* PHP 5.3 or later
+* `php-apc` extension installed
 
 ## Installation
 
 Install with [Composer](https://getcomposer.org):
 
 ```
-composer require benjamindean/one-line-apc
+$ composer require benjamindean/one-line-apc
 ```
 
 ## Usage
@@ -44,7 +49,7 @@ The main and the most important method (the reason I created this class) is call
 $cache->cached('key', 'functionName');
 ```
 
-`functionName` is the name of some function in your code which returns the data that needs to be cached.
+`functionName` is the name of some function in your code which returns the data that needs to be cached. Any variable, integer or string will work too.
 You can also pass function arguments as a third argument here.
 
 In case your function is within some class, pass it as an array of Object and a function name:
@@ -54,6 +59,50 @@ $cache->cached('key', array($obj, 'functionName'));
 ```
 
 You can find out more about callbacks [here](http://php.net/manual/en/language.types.callable.php).
+
+## Examples
+
+### Class method
+
+```php
+class ReturnData {
+    public function fetchData($url) {
+        return file_get_contents($url);
+    }
+}
+
+$obj = new ReturnData();
+
+$apc = new OneLineAPC();
+$apc->setTtl(3600);
+
+return $apc->cached('key', array($obj, 'fetchData'), array('http://example.com/'));
+
+```
+
+### Function
+
+```php
+function fetchData($url) {
+    return file_get_contents($url);
+}
+
+$apc = new OneLineAPC();
+$apc->setTtl(3600);
+
+return $apc->cached('key', 'fetchData', array('http://example.com/'));
+
+```
+### Variable
+
+```php
+$something = 'Data to be cached';
+
+$apc = new OneLineAPC();
+
+return $apc->cached('key', $something, false, 3600);
+
+```
 
 ## Notes
 

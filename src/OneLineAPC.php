@@ -92,7 +92,7 @@ class OneLineAPC
     }
 
     /**
-     * Caching the output of some function.
+     * Caching the output of some function OR any variable.
      * Callback, obviously, should return something.
      *
      * @param $key
